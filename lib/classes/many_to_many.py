@@ -1,16 +1,20 @@
 class NationalPark:
     all = []
 
+    # bonus deliverable. tested with debug.py.
     def most_visited():
+        # Return the park instance with the most visits. If no visits, return None.
         most_visited = None
         most_visits = 0
+        # iterate through all parks
         for park in NationalPark.all:
             visits = park.total_visits()
+            # Does this park have the most visits than the previous parks?
             if visits > most_visits:
                 most_visits = visits
                 most_visited = park
             if visits == most_visits:
-                # What should we do if two parks are tied for most visits?
+                # TODO: What should we do if two parks are tied for the most visits?
                 pass
         return most_visited
 
@@ -42,15 +46,20 @@ class NationalPark:
         return self.trips_list
     
     def visitors(self):
+        # return a list of unique visitors
         return list(set([trip.visitor for trip in self.trips()]))
     
     def total_visits(self):
         return len(self.trips_list)
     
+    # For this park, return the visitor who has visited the most times
     def best_visitor(self):
+        # return None if there are no visits
         best_visitor = None
         most_visits = 0
+        #  iterate through visitors
         for visitor in self.visitors():
+            # How many trips did this visitor make to this park?
             visits = len([trip for trip in self.trips() if trip.visitor == visitor])
             if visits > most_visits:
                 most_visits = visits
@@ -109,8 +118,6 @@ class Visitor:
         return self._name
 
     def set_name(self, name):
-        # if hasattr(self, "name"):
-        #     pass
         if not isinstance(name, str):
             raise ValueError("not a string")
         elif not (1 <= len(name) <= 15):
