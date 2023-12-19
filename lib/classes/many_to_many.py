@@ -2,8 +2,18 @@ class NationalPark:
     all = []
 
     def most_visited():
-        for park in list(set([park in NationalPark.all])):
-            pass
+        most_visited = None
+        most_visits = 0
+        for park in NationalPark.all:
+            visits = park.total_visits()
+            if visits > most_visits:
+                most_visits = visits
+                most_visited = park
+            if visits == most_visits:
+                # What should we do if two parks are tied for most visits?
+                pass
+        return most_visited
+
 
     def __init__(self, name):
         self.name = name
@@ -15,11 +25,11 @@ class NationalPark:
 
     def set_name(self, name):
         if hasattr(self, "name"):
-            pass
+            raise ValueError("Cannot change name of park")
         elif not isinstance(name, str):
             raise ValueError("not a string")
         elif (len(name) < 3 ):
-            pass
+            raise ValueError("too short")
         else:
             self._name = name
     
@@ -67,8 +77,10 @@ class Trip:
         if isinstance(start_date, str):
             if len(start_date) >= 7:
                 self._start_date = start_date
-        # else:
-        #     raise ValueError("not a string")
+            else:
+                raise ValueError("too short")
+        else:
+            raise ValueError("not a string")
         
     start_date = property(get_start_date, set_start_date)
 
@@ -79,8 +91,10 @@ class Trip:
         if isinstance(end_date, str):
             if len(end_date) >= 7:
                 self._end_date = end_date
-        # else:
-        #     raise ValueError("not a string")
+            else:
+                raise ValueError("too short")
+        else:
+            raise ValueError("not a string")
         
     end_date = property(get_end_date, set_end_date)
 
@@ -98,9 +112,9 @@ class Visitor:
         # if hasattr(self, "name"):
         #     pass
         if not isinstance(name, str):
-            pass
+            raise ValueError("not a string")
         elif not (1 <= len(name) <= 15):
-            pass
+            raise ValueError("name must be from 1 to 15 characters")
         else:
             self._name = name
     
