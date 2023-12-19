@@ -1,5 +1,10 @@
 class NationalPark:
     all = []
+
+    def most_visited():
+        for park in list(set([park in NationalPark.all])):
+            pass
+
     def __init__(self, name):
         self.name = name
         self.trips_list = []
@@ -12,7 +17,7 @@ class NationalPark:
         if hasattr(self, "name"):
             pass
         elif not isinstance(name, str):
-            pass
+            raise ValueError("not a string")
         elif (len(name) < 3 ):
             pass
         else:
@@ -55,25 +60,29 @@ class Trip:
         self.visitor.add_trip(self)
         Trip.all.append(self)
 
-        def get_start_date(self):
-            return self._start_date
+    def get_start_date(self):
+        return self._start_date
         
-        def set_start_date(self, start_date):
-            if isinstance(start_date, str):
-                if len(start_date) >= 7:
-                    self._start_date = start_date
+    def set_start_date(self, start_date):
+        if isinstance(start_date, str):
+            if len(start_date) >= 7:
+                self._start_date = start_date
+        # else:
+        #     raise ValueError("not a string")
         
-        start_date = property(get_start_date, set_start_date)
+    start_date = property(get_start_date, set_start_date)
 
-        def get_end_date(self):
-            return self._end_date
+    def get_end_date(self):
+        return self._end_date
         
-        def set_end_date(self, end_date):
-            if isinstance(end_date, str):
-                if len(end_date) >= 7:
-                    self._end_date = end_date
+    def set_end_date(self, end_date):
+        if isinstance(end_date, str):
+            if len(end_date) >= 7:
+                self._end_date = end_date
+        # else:
+        #     raise ValueError("not a string")
         
-        end_date = property(get_end_date, set_end_date)
+    end_date = property(get_end_date, set_end_date)
 
 class Visitor:
     all = []
